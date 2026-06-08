@@ -4,7 +4,7 @@
 [![Jekyll](https://img.shields.io/badge/built%20with-Jekyll-red.svg)](https://jekyllrb.com/)
 [![GitHub Pages](https://img.shields.io/badge/hosted%20on-GitHub%20Pages-blue.svg)](https://pages.github.com/)
 
-**A curated dictionary of modern Yoruba terminology for science, technology, mathematics, economics, and education.**  
+**A curated dictionary of modern Yoruba terminology for science, technology, mathematics, economics, education, and general knowledge.**  
 All terms are original coinages by **Hakeem Oluwafemi Adeniyan**.
 
 🔗 **Live site:** [https://hakeemoadeniyan.github.io](https://hakeemoadeniyan.github.io)
@@ -13,7 +13,7 @@ All terms are original coinages by **Hakeem Oluwafemi Adeniyan**.
 
 ## 📖 About This Project
 
-The Yoruba language, spoken by over 50 million people, lacks standardized terminology for many modern concepts in science, technology, mathematics, and education. This project addresses that gap by coining new Yoruba words following systematic linguistic principles.
+The Yoruba language, spoken by over 50 million people, lacks standardized terminology for many modern concepts in science, technology, mathematics, economics, education, and general knowledge. This project addresses that gap by coining new Yoruba words following systematic linguistic principles.
 
 Each entry includes:
 - **The coined Yoruba term**
@@ -44,6 +44,7 @@ The dictionary is organized by subject areas:
 | **Mathematics** | algorithm, variable, equation |
 | **Education** | curriculum, pedagogy, assignment |
 | **Economics** | demand, supply, production |
+| **General knowledge** | pragmatic, ideal, real |
 
 More subjects will be added as the dictionary grows.
 
