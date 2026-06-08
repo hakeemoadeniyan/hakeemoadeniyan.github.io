@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "name": "Education",
+  "translationType": "single",
+  "learning": "yo",
+  "data": [
+    {
+      "learning": "Kọ̀mpútà alágbèéká",
+      "primary": "laptop computer",
+      "notes": {
+        "learning": "From 'kọ̀mpútà' (borrowed from English 'computer') + 'alágbèéká' (that which is carried under the arm). The combination refers to a portable computer."
+      },
+      "examples": [
+        "Mo fi kọ̀mpútà alágbèéká ṣe iṣẹ́ mi. (I use my laptop for work)",
+        "Kọ̀mpútà alágbèéká mi ti ku. (My laptop is dead)"
+      ],
+      "date_coined": "2026-06-07",
+      "subject": "Education"
+    }
+  ]
+}
