@@ -3,5 +3,19 @@
   "name": "Science",
   "translationType": "single",
   "learning": "yo",
-  "data": []
+  "data": [
+    {
+      "learning": "Ìmọ̀ sáyẹ́nsì",
+      "primary": "science",
+      "notes": {
+        "learning": "From 'ìmọ̀' (knowledge) + 'sáyẹ́nsì' (borrowed and adapted from English 'science'). Refers to systematic knowledge acquired through observation and experimentation."
+      },
+      "examples": [
+        "Ìmọ̀ sáyẹ́nsì ń ṣàlàyé bí àwọn ohun ṣe ń ṣiṣẹ́. (Science explains how things work)",
+        "Ó ń kẹ́kọ̀ọ́ ìmọ̀ sáyẹ́nsì ní yunifásítì. (She is studying science at the university)"
+      ],
+      "date_coined": "2026-06-09",
+      "subject": "Science"
+    }
+  ]
 }
