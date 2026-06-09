@@ -3,5 +3,19 @@
   "name": "Education",
   "translationType": "single",
   "learning": "yo",
-  "data": []
+  "data": [
+    {
+      "learning": "Ẹ̀kọ́",
+      "primary": "education",
+      "notes": {
+        "learning": "From the existing Yoruba word 'ẹ̀kọ́' (learning/instruction). Extended to cover formal education systems, pedagogy, and curriculum."
+      },
+      "examples": [
+        "Ẹ̀kọ́ jẹ́ ọ̀nà sí ìdàgbàsókè. (Education is the path to development)",
+        "Ìjọba ń ṣe àtúnṣe ètò ẹ̀kọ́ orílẹ̀-èdè. (The government is reforming the national education system)"
+      ],
+      "date_coined": "2026-06-09",
+      "subject": "Education"
+    }
+  ]
 }
