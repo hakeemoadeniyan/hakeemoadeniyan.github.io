@@ -46,7 +46,12 @@ footer {
   color: #666;
 }
 
-/* Homepage */
+/* Homepage Styles */
+.dictionary-home {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .hero-section {
   text-align: center;
   margin-bottom: 2rem;
@@ -63,11 +68,13 @@ footer {
 .tagline {
   font-size: 1.1rem;
   color: #555;
+  margin: 0.5rem 0;
 }
 
 .author-credit {
   font-size: 0.85rem;
   color: #666;
+  margin: 0.5rem 0;
 }
 
 /* Stats Bar */
@@ -89,12 +96,20 @@ footer {
   font-size: 0.9rem;
 }
 
+.stat-icon {
+  font-size: 1.2rem;
+}
+
+.stat-label {
+  color: #666;
+}
+
 .stat-value {
   font-weight: bold;
   color: #8B0000;
 }
 
-/* Search */
+/* Search Container */
 .search-container {
   margin-bottom: 1.5rem;
 }
@@ -129,9 +144,14 @@ footer {
   font-size: 1.2rem;
   cursor: pointer;
   color: #999;
+  padding: 5px;
 }
 
-/* Filters */
+.clear-btn:hover {
+  color: #8B0000;
+}
+
+/* Search Filters */
 .search-filters {
   display: flex;
   justify-content: center;
@@ -226,7 +246,26 @@ footer {
   margin-top: 10px;
 }
 
-/* Dictionary Entry Page */
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.no-results p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.no-results a {
+  color: #8B0000;
+  text-decoration: underline;
+}
+
+/* Dictionary Entry Page Styles */
 .english-meaning {
   background: #e8f0e8;
   padding: 12px 20px;
@@ -343,6 +382,7 @@ footer {
 .btn-cite:hover {
   background: #6d0000;
   transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .btn-cite.btn-plain {
@@ -351,15 +391,6 @@ footer {
 
 .btn-cite.btn-plain:hover {
   background: #3d3d3d;
-}
-
-/* No Results */
-.no-results {
-  text-align: center;
-  padding: 3rem;
-  background: #f9f9f9;
-  border-radius: 12px;
-  margin: 2rem 0;
 }
 
 /* Mobile Responsive */
@@ -379,6 +410,10 @@ footer {
   .stats-bar {
     gap: 1rem;
     padding: 0.5rem 1rem;
+  }
+  
+  .stat-item {
+    font-size: 0.75rem;
   }
   
   .word-grid {
