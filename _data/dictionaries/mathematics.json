@@ -3,5 +3,19 @@
   "name": "Mathematics",
   "translationType": "single",
   "learning": "yo",
-  "data": []
+  "data": [
+    {
+      "learning": "Ìmọ̀ ìṣirò",
+      "primary": "mathematics",
+      "notes": {
+        "learning": "From 'ìmọ̀' (knowledge) + 'ìṣirò' (calculation/computation). Refers to the abstract science of numbers, quantity, and space."
+      },
+      "examples": [
+        "Ìmọ̀ ìṣirò ṣe pàtàkì fún iṣẹ́ ẹ̀rọ kọ̀mpútà. (Mathematics is important for computer science)",
+        "Ó ń kọ́ àwọn ọmọ ilé ẹ̀kọ́ ní ìmọ̀ ìṣirò. (He teaches mathematics to students)"
+      ],
+      "date_coined": "2026-06-09",
+      "subject": "Mathematics"
+    }
+  ]
 }
