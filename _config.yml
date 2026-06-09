@@ -1,9 +1,7 @@
 title: Yoruba Terminology Dictionary
 description: Modern Yoruba words for science, technology, mathematics, and education
 author: Hakeem Oluwafemi Adeniyan
-lang: yo
-url: https://yourusername.github.io
-baseurl: ""
+url: https://hakeemoadeniyan.github.io
 
 # Dictionary plugin configuration
 dictionaries:
@@ -13,10 +11,10 @@ dictionaries:
       permalink: /dictionary/:name/
 
 # Build settings
-theme: minima
 plugins:
   - jekyll-dictionaries
   - jekyll-feed
+  - jekyll-sitemap
 
 # Exclude from processing
 exclude:
