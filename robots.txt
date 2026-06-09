@@ -1,0 +1,25 @@
+# ============================================
+# robots.txt for Yoruba Terminology Dictionary
+# Author: Hakeem Oluwafemi Adeniyan
+# ============================================
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Block Jekyll source files (not needed for indexing)
+Disallow: /_site/
+Disallow: /_layouts/
+Disallow: /_includes/
+Disallow: /_data/
+
+# Block version control files
+Disallow: /.git/
+Disallow: /.github/
+
+# Block dependency files
+Disallow: /Gemfile
+Disallow: /Gemfile.lock
+
+# Tell search engines where your sitemap is
+Sitemap: https://hakeemoadeniyan.github.io/sitemap.xml
