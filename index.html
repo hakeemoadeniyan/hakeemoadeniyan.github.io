@@ -6,7 +6,7 @@ title: Yoruba Terminology Dictionary
 <div class="dictionary-home">
   <div class="hero-section">
     <h1>Yoruba Terminology Dictionary</h1>
-    <p class="tagline">Modern Yoruba words for science, technology, mathematics, education, economics, and general knowledge</p>
+    <p class="tagline">Modern Yoruba words for science, technology, mathematics, and education</p>
     <p class="author-credit">All terms coined by <strong>Hakeem Oluwafemi Adeniyan</strong></p>
   </div>
   
@@ -31,7 +31,6 @@ title: Yoruba Terminology Dictionary
   <div class="search-container">
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="🔍 Search for a Yoruba term or English meaning...">
-      <button id="searchClear" class="clear-btn" style="display: none;">✖</button>
     </div>
     <div class="search-filters">
       <button class="filter-btn active" data-filter="all">All</button>
@@ -85,7 +84,6 @@ title: Yoruba Terminology Dictionary
 <script>
   const wordGrid = document.getElementById('wordGrid');
   const searchInput = document.getElementById('searchInput');
-  const searchClear = document.getElementById('searchClear');
   const resultsCount = document.getElementById('resultsCount');
   const visibleCountSpan = document.getElementById('visibleCount');
   const totalCountSpan = document.getElementById('totalCount');
@@ -134,17 +132,9 @@ title: Yoruba Terminology Dictionary
       noResultsDiv.style.display = 'none';
       resultsCount.style.display = 'block';
     }
-    
-    searchClear.style.display = searchTerm ? 'block' : 'none';
   }
   
   searchInput.addEventListener('input', filterTerms);
-  
-  searchClear.addEventListener('click', function() {
-    searchInput.value = '';
-    filterTerms();
-    searchInput.focus();
-  });
   
   const filterButtons = document.querySelectorAll('.filter-btn');
   let currentFilter = 'all';
