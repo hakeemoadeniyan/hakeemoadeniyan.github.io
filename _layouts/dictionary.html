@@ -37,22 +37,22 @@ layout: default
       Coined by <strong>Hakeem Oluwafemi Adeniyan</strong> — APA 7th Edition
     </div>
     
-    {% capture citation_formatted %}Hakeem Oluwafemi Adeniyan ({{ page.date_coined | date: '%Y, %B %d' }}). *{{ page.learning }}* ({{ page.primary }}). In *Yoruba Terminology Dictionary*. Retrieved from {{ site.url }}{{ page.url }}{% endcapture %}
+    {% capture citation_formatted %}Hakeem Oluwafemi Adeniyan ({{ page.date_coined | date: '%Y, %B %d' }}). {{ page.learning }} ({{ page.primary }}). In *Yoruba Terminology Dictionary*. Retrieved from {{ site.url }}{{ page.url }}{% endcapture %}
     
     {% capture citation_plain %}Hakeem Oluwafemi Adeniyan ({{ page.date_coined | date: '%Y, %B %d' }}). "{{ page.learning }}" ({{ page.primary }}). In "Yoruba Terminology Dictionary." Retrieved from {{ site.url }}{{ page.url }}{% endcapture %}
     
     <div class="citation-preview">
       <strong>Preview:</strong>
-      <div class="citation-preview-text">{{ citation_formatted | markdownify }}</div>
+      <div class="citation-preview-text">{{ citation_formatted }}</div>
     </div>
     
-    <label for="citationFormatted" class="citation-label">📋 Formatted citation (with italics):</label>
-    <input type="text" id="citationFormatted" class="cite-input" 
-           value="{{ citation_formatted | strip_newlines | strip_html }}" readonly>
+    <label class="citation-label">📋 Formatted citation:</label>
+    <input type="text" class="cite-input" id="citationFormatted" 
+           value="{{ citation_formatted | strip_html }}" readonly>
     
-    <label for="citationPlain" class="citation-label">📄 Plain text citation:</label>
-    <input type="text" id="citationPlain" class="cite-input" 
-           value="{{ citation_plain | strip_newlines }}" readonly>
+    <label class="citation-label">📄 Plain text citation:</label>
+    <input type="text" class="cite-input" id="citationPlain" 
+           value="{{ citation_plain }}" readonly>
     
     <div class="cite-buttons">
       <button class="btn-cite" onclick="copyCitation('citationFormatted', this)">
