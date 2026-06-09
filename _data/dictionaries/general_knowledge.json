@@ -3,5 +3,19 @@
   "name": "General Knowledge",
   "translationType": "single",
   "learning": "yo",
-  "data": []
+  "data": [
+    {
+      "learning": "Ìmọ̀ gbogbogbò",
+      "primary": "general knowledge",
+      "notes": {
+        "learning": "From 'ìmọ̀' (knowledge) + 'gbogbogbò' (general/universal). Refers to information accumulated over time across various subjects."
+      },
+      "examples": [
+        "Ìmọ̀ gbogbogbò ṣe pàtàkì fún ìdánwò. (General knowledge is important for examinations)",
+        "Ó ní ìmọ̀ gbogbogbò lórí ọ̀pọ̀lọpọ̀ kókó. (He has general knowledge on many topics)"
+      ],
+      "date_coined": "2026-06-09",
+      "subject": "General Knowledge"
+    }
+  ]
 }
