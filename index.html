@@ -31,6 +31,7 @@ title: Yoruba Terminology Dictionary
   <div class="search-container">
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="🔍 Search for a Yoruba term or English meaning...">
+      <button id="searchClear" class="clear-btn" style="display: none;">✖</button>
     </div>
     <div class="search-filters">
       <button class="filter-btn active" data-filter="all">All</button>
@@ -77,13 +78,14 @@ title: Yoruba Terminology Dictionary
   
   <div class="no-results" id="noResults" style="display: none;">
     <p>🔍 No terms found matching your search.</p>
-    <p>Try a different keyword or browse all terms.</p>
+    <p>Try a different keyword or <a href="{{ site.baseurl }}/dictionary/">browse all terms</a>.</p>
   </div>
 </div>
 
 <script>
   const wordGrid = document.getElementById('wordGrid');
   const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
   const resultsCount = document.getElementById('resultsCount');
   const visibleCountSpan = document.getElementById('visibleCount');
   const totalCountSpan = document.getElementById('totalCount');
@@ -132,9 +134,17 @@ title: Yoruba Terminology Dictionary
       noResultsDiv.style.display = 'none';
       resultsCount.style.display = 'block';
     }
+    
+    searchClear.style.display = searchTerm ? 'block' : 'none';
   }
   
   searchInput.addEventListener('input', filterTerms);
+  
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    filterTerms();
+    searchInput.focus();
+  });
   
   const filterButtons = document.querySelectorAll('.filter-btn');
   let currentFilter = 'all';
