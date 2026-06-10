@@ -12,8 +12,8 @@ definition: >
   (A laptop computer is a portable computing device with an integrated keyboard and a screen that folds shut.
   It is used in offices, schools, and locations without a fixed power supply, running on a rechargeable battery.)
 formation: >
-  The term combines two elements: <strong>Kọ̀mpútà</strong> — a phonological adaptation of "computer" into Yoruba syllable structure,
-  preserving the tonal pattern (kọ̀-mpú-tà); and <strong>alágbèéká</strong> — a native Yoruba word meaning "one who can be carried/moved,"
+  The term combines two elements: **Kọ̀mpútà** — a phonological adaptation of "computer" into Yoruba syllable structure,
+  preserving the tonal pattern (kọ̀-mpú-tà); and **alágbèéká** — a native Yoruba word meaning "one who can be carried/moved,"
   derived from the verb *gbé* (to carry) with the agentive prefix *alá-* and suffix *-ká*.
   Together, the compound means "a computer that can be carried" — transparent, native in feel, and formed from existing Yoruba morphology.
 examples:
