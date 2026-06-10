@@ -1,0 +1,45 @@
+title: "Yoruba Terminology Dictionary"
+description: "A scholarly reference for modern Yoruba terminology in science, technology, mathematics, education, economics, and general knowledge. Coined by Hakeem Oluwafemi Adeniyan."
+author:
+  name: "Hakeem Oluwafemi Adeniyan"
+  email: ""
+url: "https://hakeemoadeniyan.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Collections – each word entry is a document in _words
+collections:
+  words:
+    output: true
+    permalink: /dictionary/:name/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "words"
+    values:
+      layout: "dictionary"
+      author: "Hakeem Oluwafemi Adeniyan"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - README.md
+  - .git
+  - .github
+
+# SEO
+lang: "en"
+timezone: "Africa/Lagos"

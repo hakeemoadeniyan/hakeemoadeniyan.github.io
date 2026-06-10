@@ -1,0 +1,114 @@
+---
+layout: default
+title: "Home"
+description: "Scholarly reference for modern Yoruba terminology in science, technology, mathematics, education, economics, and general knowledge. Coined by Hakeem Oluwafemi Adeniyan."
+---
+
+<section class="hero">
+  <div class="container">
+    <h1>Modern Yoruba Terminology<br>for <em>Science, Technology & Education</em></h1>
+    <p>A scholarly dictionary coining new Yoruba words for the modern world — preserving the language while expanding it into every domain of knowledge.</p>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number" id="stat-total">0</span>
+    <span class="stat-label">Terms Coined</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" id="stat-latest">—</span>
+    <span class="stat-label">Latest Addition</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">H. O. Adeniyan</span>
+    <span class="stat-label">Author & Coiner</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="search-area">
+    <div class="search-row">
+      <input type="search" id="search-input" placeholder="Search Yoruba or English term…" aria-label="Search terms" />
+      <button id="clear-btn" onclick="clearSearch()" aria-label="Clear search">✕</button>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-subject="all" onclick="filterBy(this)">All</button>
+      <button class="filter-btn" data-subject="Technology" onclick="filterBy(this)">Technology</button>
+      <button class="filter-btn" data-subject="Science" onclick="filterBy(this)">Science</button>
+      <button class="filter-btn" data-subject="Mathematics" onclick="filterBy(this)">Mathematics</button>
+      <button class="filter-btn" data-subject="Education" onclick="filterBy(this)">Education</button>
+      <button class="filter-btn" data-subject="Economics" onclick="filterBy(this)">Economics</button>
+      <button class="filter-btn" data-subject="General Knowledge" onclick="filterBy(this)">General Knowledge</button>
+    </div>
+    <p class="results-count" id="results-count"></p>
+  </div>
+
+  <div class="word-grid" id="word-grid">
+    {% assign all_words = site.words | sort: "date_coined" | reverse %}
+    {% for word in all_words %}
+    <a href="{{ word.url | relative_url }}" class="word-card"
+       data-subject="{{ word.subject }}"
+       data-yoruba="{{ word.yoruba_term | downcase }}"
+       data-english="{{ word.english_meaning | downcase }}">
+      <div class="card-subject">{{ word.subject }}</div>
+      <div class="card-yoruba">{{ word.yoruba_term }}</div>
+      <div class="card-english">{{ word.english_meaning }}</div>
+      <div class="card-date">{{ word.date_coined | date: "%b %Y" }}</div>
+    </a>
+    {% endfor %}
+    <div class="no-results" id="no-results" style="display:none;">
+      No terms found. Try a different search or filter.
+    </div>
+  </div>
+</div>
+
+<script>
+  const cards = Array.from(document.querySelectorAll('.word-card'));
+  let activeSubject = 'all';
+  let searchTerm = '';
+
+  // Stats
+  document.getElementById('stat-total').textContent = cards.length;
+  if (cards.length > 0) {
+    const latest = cards[0].querySelector('.card-yoruba').textContent;
+    document.getElementById('stat-latest').textContent = latest;
+  }
+
+  function updateDisplay() {
+    let visible = 0;
+    cards.forEach(card => {
+      const subjectMatch = activeSubject === 'all' || card.dataset.subject === activeSubject;
+      const termMatch = !searchTerm ||
+        card.dataset.yoruba.includes(searchTerm) ||
+        card.dataset.english.includes(searchTerm);
+      const show = subjectMatch && termMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    const countEl = document.getElementById('results-count');
+    countEl.textContent = searchTerm || activeSubject !== 'all'
+      ? `${visible} term${visible !== 1 ? 's' : ''} found`
+      : '';
+    document.getElementById('no-results').style.display = visible === 0 ? '' : 'none';
+  }
+
+  function filterBy(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeSubject = btn.dataset.subject;
+    updateDisplay();
+  }
+
+  function clearSearch() {
+    document.getElementById('search-input').value = '';
+    searchTerm = '';
+    updateDisplay();
+  }
+
+  document.getElementById('search-input').addEventListener('input', function() {
+    searchTerm = this.value.toLowerCase().trim();
+    updateDisplay();
+  });
+</script>

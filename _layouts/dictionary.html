@@ -1,0 +1,130 @@
+---
+layout: default
+---
+
+{% assign coined_year = page.date_coined | date: "%Y" %}
+{% assign coined_month = page.date_coined | date: "%B" %}
+{% assign coined_day = page.date_coined | date: "%-d" %}
+{% assign page_url = page.url | absolute_url %}
+{% assign slug = page.url | remove: '/dictionary/' | remove: '/' %}
+
+{% capture apa_formatted %}Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). *{{ page.yoruba_term }}* ({{ page.english_meaning }}). In *Yoruba Terminology Dictionary*. Retrieved from {{ page_url }}{% endcapture %}
+
+{% capture apa_plain %}Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). {{ page.yoruba_term }} ({{ page.english_meaning }}). In Yoruba Terminology Dictionary. Retrieved from {{ page_url }}{% endcapture %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "{{ page.yoruba_term }}",
+  "description": "{{ page.english_meaning }} — {{ page.definition | strip_html | truncate: 200 }}",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Yoruba Terminology Dictionary",
+    "url": "https://hakeemoadeniyan.github.io"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hakeem Oluwafemi Adeniyan"
+  },
+  "dateCreated": "{{ page.date_coined }}"
+}
+</script>
+
+<article class="word-entry">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a> ›
+      <a href="{{ '/dictionary/' | relative_url }}">Dictionary</a> ›
+      <span>{{ page.yoruba_term }}</span>
+    </nav>
+
+    <header class="word-header">
+      <div class="word-subject-tag">{{ page.subject }}</div>
+      <h1 class="word-yoruba">{{ page.yoruba_term }}</h1>
+      <p class="word-english">{{ page.english_meaning }}</p>
+      <p class="word-meta">Coined by <strong>Hakeem Oluwafemi Adeniyan</strong> · {{ page.date_coined | date: "%B %-d, %Y" }}</p>
+    </header>
+
+    <section class="word-section">
+      <h2>Definition</h2>
+      <div class="word-definition">{{ page.definition }}</div>
+    </section>
+
+    {% if page.formation %}
+    <section class="word-section">
+      <h2>Formation</h2>
+      <div class="word-formation">{{ page.formation }}</div>
+    </section>
+    {% endif %}
+
+    {% if page.examples %}
+    <section class="word-section">
+      <h2>Usage Examples</h2>
+      <ul class="word-examples">
+        {% for example in page.examples %}
+        <li>
+          <span class="example-yo">{{ example.yoruba }}</span>
+          <span class="example-en">{{ example.english }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if page.related %}
+    <section class="word-section">
+      <h2>Related Terms</h2>
+      <div class="related-tags">
+        {% for term in page.related %}
+        <a href="{{ '/dictionary/' | relative_url }}{{ term | slugify }}/" class="related-tag">{{ term }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="word-section citation-section">
+      <h2>Cite This Entry</h2>
+      <p class="citation-note">APA 7th Edition</p>
+
+      <div class="citation-block">
+        <label class="citation-label">Formatted (with italics indicator)</label>
+        <div class="citation-text" id="cite-formatted">{{ apa_formatted }}</div>
+        <button class="copy-btn" onclick="copyCitation('cite-formatted', this)">Copy</button>
+      </div>
+
+      <div class="citation-block">
+        <label class="citation-label">Plain text</label>
+        <div class="citation-text" id="cite-plain">{{ apa_plain }}</div>
+        <button class="copy-btn" onclick="copyCitation('cite-plain', this)">Copy</button>
+      </div>
+    </section>
+
+  </div>
+</article>
+
+<script>
+function copyCitation(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    // Fallback for older browsers
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>

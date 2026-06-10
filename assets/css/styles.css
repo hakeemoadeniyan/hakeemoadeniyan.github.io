@@ -1,0 +1,628 @@
+/* ===================================================
+   Yoruba Terminology Dictionary — Stylesheet
+   Design: Deep indigo + warm ochre + cream parchment
+   Typography: Noto Serif (display) + Inter (body)
+   =================================================== */
+
+/* --- Tokens --- */
+:root {
+  --indigo-900: #1a1a4e;
+  --indigo-700: #2d2d7a;
+  --indigo-100: #eeeef9;
+  --ochre:       #c8810a;
+  --ochre-light: #f5e9d0;
+  --cream:       #faf8f3;
+  --ink:         #1c1c1c;
+  --ink-muted:   #5a5a6e;
+  --border:      #dddde8;
+  --white:       #ffffff;
+  --green:       #2e7d32;
+  --radius:      6px;
+  --shadow:      0 2px 12px rgba(26,26,78,0.08);
+  --font-display: 'Noto Serif', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'Noto Sans Mono', monospace;
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+a { color: var(--indigo-700); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--ochre); }
+img { max-width: 100%; display: block; }
+
+/* --- Container --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ===================================================
+   HEADER
+   =================================================== */
+.site-header {
+  background: var(--indigo-900);
+  border-bottom: 3px solid var(--ochre);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+.site-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.brand-yo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ochre);
+  letter-spacing: 0.02em;
+}
+.brand-en {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.site-nav {
+  display: flex;
+  gap: 0.25rem;
+}
+.site-nav a {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+.site-nav a:hover,
+.site-nav a.active {
+  background: rgba(200,129,10,0.2);
+  color: var(--ochre);
+}
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+}
+
+/* ===================================================
+   HOMEPAGE HERO
+   =================================================== */
+.hero {
+  background: linear-gradient(135deg, var(--indigo-900) 0%, var(--indigo-700) 100%);
+  color: var(--white);
+  padding: 4rem 0 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: 'Ìtumọ̀';
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 14rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.hero h1 em {
+  color: var(--ochre);
+  font-style: normal;
+}
+.hero p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* --- Stats Bar --- */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  background: var(--ochre-light);
+  border-top: 2px solid var(--ochre);
+  padding: 1rem 1.5rem;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--indigo-900);
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ===================================================
+   SEARCH & FILTER
+   =================================================== */
+.search-area {
+  padding: 2rem 0 1rem;
+}
+.search-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+#search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+#search-input:focus {
+  outline: none;
+  border-color: var(--indigo-700);
+}
+#clear-btn {
+  padding: 0.75rem 1.1rem;
+  background: var(--border);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--ink-muted);
+  transition: background 0.15s;
+}
+#clear-btn:hover { background: var(--indigo-100); }
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.filter-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 0.25rem;
+}
+.filter-btn {
+  padding: 0.35rem 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--ink-muted);
+  transition: all 0.15s;
+}
+.filter-btn:hover {
+  border-color: var(--indigo-700);
+  color: var(--indigo-700);
+}
+.filter-btn.active {
+  background: var(--indigo-900);
+  border-color: var(--indigo-900);
+  color: var(--white);
+}
+
+.results-count {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin-top: 0.75rem;
+}
+
+/* ===================================================
+   WORD GRID
+   =================================================== */
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding: 1.5rem 0 3rem;
+}
+.word-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.word-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ochre);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.2s;
+}
+.word-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-color: var(--indigo-100);
+  text-decoration: none;
+}
+.word-card:hover::before { transform: scaleY(1); }
+
+.card-subject {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ochre);
+  margin-bottom: 0.5rem;
+}
+.card-yoruba {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--indigo-900);
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+.card-english {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+.card-date {
+  font-size: 0.75rem;
+  color: var(--border);
+  margin-top: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--ink-muted);
+}
+
+/* ===================================================
+   DICTIONARY INDEX PAGE
+   =================================================== */
+.dict-index-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+.dict-index-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--indigo-900);
+}
+.dict-index-header p {
+  color: var(--ink-muted);
+  margin-top: 0.5rem;
+}
+
+/* ===================================================
+   WORD ENTRY PAGE
+   =================================================== */
+.word-entry {
+  padding: 2rem 0 4rem;
+}
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-bottom: 2rem;
+}
+.breadcrumb a { color: var(--ink-muted); }
+.breadcrumb a:hover { color: var(--ochre); }
+
+.word-header {
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+.word-subject-tag {
+  display: inline-block;
+  background: var(--ochre-light);
+  color: var(--ochre);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.word-yoruba {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--indigo-900);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.word-english {
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+.word-meta {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+.word-meta strong { color: var(--indigo-700); }
+
+.word-section {
+  margin-bottom: 2.5rem;
+}
+.word-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--indigo-900);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.word-definition,
+.word-formation {
+  line-height: 1.8;
+  color: var(--ink);
+}
+.word-examples {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.word-examples li {
+  background: var(--indigo-100);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+.example-yo {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--indigo-900);
+  margin-bottom: 0.25rem;
+}
+.example-en {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* Related Terms */
+.related-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.related-tag {
+  padding: 0.35rem 0.9rem;
+  background: var(--ochre-light);
+  color: var(--ochre);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.related-tag:hover {
+  background: var(--ochre);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* ===================================================
+   CITATION BOX
+   =================================================== */
+.citation-section {
+  background: var(--indigo-100);
+  border: 1px solid var(--indigo-700);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.citation-section h2 {
+  border-bottom-color: rgba(45,45,122,0.2);
+}
+.citation-note {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 1.25rem;
+}
+.citation-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.citation-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+.citation-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink);
+  word-break: break-word;
+  margin-bottom: 0.75rem;
+}
+.copy-btn {
+  padding: 0.4rem 1rem;
+  background: var(--indigo-900);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copy-btn:hover { background: var(--indigo-700); }
+.copy-btn.copied { background: var(--green); }
+
+/* ===================================================
+   ABOUT PAGE
+   =================================================== */
+.about-page {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 4rem;
+}
+.about-page h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--indigo-900);
+  margin-bottom: 0.5rem;
+}
+.about-page .subtitle {
+  color: var(--ochre);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+.about-page h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--indigo-900);
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.about-page p { margin-bottom: 1rem; line-height: 1.8; }
+.about-page ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+.about-page li { margin-bottom: 0.4rem; line-height: 1.7; }
+
+/* Citation example box on About page */
+.cite-example {
+  background: var(--indigo-100);
+  border-left: 4px solid var(--indigo-700);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin: 1rem 0;
+  word-break: break-word;
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+.site-footer {
+  background: var(--indigo-900);
+  color: rgba(255,255,255,0.6);
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.82rem;
+  margin-top: auto;
+}
+.site-footer strong { color: var(--ochre); }
+.site-footer a { color: rgba(255,255,255,0.6); }
+.site-footer a:hover { color: var(--ochre); text-decoration: none; }
+.footer-cite {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 800px) {
+  .word-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .nav-toggle { display: block; }
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--indigo-900);
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    z-index: 200;
+  }
+  .site-nav.open { display: flex; }
+  .site-header { position: relative; }
+
+  .word-grid { grid-template-columns: 1fr; }
+  .stats-bar { gap: 1.5rem; }
+  .search-row { flex-direction: column; }
+  #search-input, #clear-btn { width: 100%; }
+  .filter-row { gap: 0.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

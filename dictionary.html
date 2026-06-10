@@ -1,0 +1,25 @@
+---
+layout: default
+title: "Dictionary"
+description: "Browse all coined Yoruba terms by Hakeem Oluwafemi Adeniyan."
+permalink: /dictionary/
+---
+
+<div class="container">
+  <div class="dict-index-header">
+    <h1>Dictionary</h1>
+    <p>All coined Yoruba terms, listed alphabetically. Each entry includes definition, formation, examples, and a citable APA reference.</p>
+  </div>
+
+  <div class="word-grid">
+    {% assign all_words = site.words | sort: "yoruba_term" %}
+    {% for word in all_words %}
+    <a href="{{ word.url | relative_url }}" class="word-card">
+      <div class="card-subject">{{ word.subject }}</div>
+      <div class="card-yoruba">{{ word.yoruba_term }}</div>
+      <div class="card-english">{{ word.english_meaning }}</div>
+      <div class="card-date">Coined {{ word.date_coined | date: "%B %Y" }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

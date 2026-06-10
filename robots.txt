@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /_site/
+Disallow: /_layouts/
+Disallow: /_includes/
+Disallow: /_data/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /Gemfile
+Disallow: /Gemfile.lock
+
+Sitemap: https://hakeemoadeniyan.github.io/sitemap.xml
