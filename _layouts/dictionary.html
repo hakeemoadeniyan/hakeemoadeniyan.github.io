@@ -49,13 +49,13 @@ layout: default
 
     <section class="word-section">
       <h2>Definition</h2>
-      <div class="word-definition">{{ page.definition }}</div>
+      <div class="word-definition">{{ page.definition | markdownify }}</div>
     </section>
 
     {% if page.formation %}
     <section class="word-section">
       <h2>Formation</h2>
-      <div class="word-formation">{{ page.formation }}</div>
+      <div class="word-formation">{{ page.formation | markdownify }}</div>
     </section>
     {% endif %}
 
@@ -89,8 +89,8 @@ layout: default
       <p class="citation-note">APA 7th Edition</p>
 
       <div class="citation-block">
-        <label class="citation-label">Formatted (with italics indicator)</label>
-        <div class="citation-text" id="cite-formatted">{{ apa_formatted }}</div>
+        <label class="citation-label">Formatted (APA with italics)</label>
+        <div class="citation-text" id="cite-formatted">Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). <em>{{ page.yoruba_term }}</em> ({{ page.english_meaning }}). In <em>Yoruba Terminology Dictionary</em>. Retrieved from {{ page_url }}</div>
         <button class="copy-btn" onclick="copyCitation('cite-formatted', this)">Copy</button>
       </div>
 
@@ -106,6 +106,7 @@ layout: default
 
 <script>
 function copyCitation(id, btn) {
+  // Use innerText so HTML tags (like <em>) are stripped — copies clean plain text
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text).then(() => {
     const original = btn.textContent;
@@ -116,7 +117,6 @@ function copyCitation(id, btn) {
       btn.classList.remove('copied');
     }, 2000);
   }).catch(() => {
-    // Fallback for older browsers
     const el = document.createElement('textarea');
     el.value = text;
     document.body.appendChild(el);
