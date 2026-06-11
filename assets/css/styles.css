@@ -626,26 +626,3 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
-
-/* ===================================================
-   RIS DOWNLOAD BLOCK
-   =================================================== */
-.ris-block {
-  border-top: 2px dashed var(--ochre);
-  margin-top: 1.25rem;
-  padding-top: 1.25rem;
-}
-.ris-description {
-  font-size: 0.85rem;
-  color: var(--ink-muted);
-  margin-bottom: 0.75rem;
-  line-height: 1.6;
-}
-.ris-btn {
-  background: var(--ochre);
-  font-size: 0.9rem;
-  padding: 0.55rem 1.25rem;
-}
-.ris-btn:hover {
-  background: #a86c08;
-}
