@@ -11,7 +11,7 @@ definition: >
   (A laptop computer is a portable computing device with an integrated keyboard and a screen that folds shut.
   It is used in offices, schools, and locations without a fixed power supply, running on a rechargeable battery.)
 formation: >
-  Àsọyé náà kó ọmọnú méjì papọ̀: **Kọ̀ǹpútà** — tó jẹ́ ọ̀rọ̀ àyálò láti ara "computer" ṣùgbọ́n tí a ìdàrọ rẹ̀ ní ìlànà fònẹ́tíìkì èdè Yorùbá,
+  Àsọyé náà kó ọmọnú méjì papọ̀: **Kọ̀ǹpútà** — tó jẹ́ ọ̀rọ̀ àyálò láti ara "computer" ṣùgbọ́n tí a ṣe ìdàrọ rẹ̀ ní ìlànà fònẹ́tíìkì èdè Yorùbá,
   àti **alágbèéká** — ọ̀rọ̀ Yorùbá tó túmọ̀ sí "tó ṣeé gbé káàkiri".
 examples:
   - yoruba: "Mo gbé kọ̀ǹpútà alágbèéká mi lọ sí ilé-ẹ̀kọ́ lánàá."
@@ -21,6 +21,6 @@ examples:
   - yoruba: "Bátìrì kọ̀ǹpútà alágbèéká mi ti kú, mo nílò iná."
     english: "My laptop battery is dead, I need power."
 related:
-  - "Kọ̀mpútà"
+  - "Kọ̀ǹpútà"
   - "Fóònù alágbèéká"
 ---
