@@ -22,5 +22,5 @@ examples:
     english: "This algorithm has five steps."
 related:
   - "Kọ̀ǹpútà"
-  - "Ìmọ̀jinlẹ kọ̀ǹpútap"
+  - "Ìmọ̀jinlẹ̀ kọ̀ǹpútà"
 ---
