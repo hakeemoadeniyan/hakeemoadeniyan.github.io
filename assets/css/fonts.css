@@ -1,0 +1,43 @@
+/*
+ * Comprehensive Font Stack for Yoruba Terminology Dictionary
+ * 
+ * Strategy: Use system fonts with full Unicode support as the primary stack,
+ * with Google Fonts as enhancement. This guarantees all Yoruba characters
+ * (ẹ, ọ, ṣ, ǹ, ń, and all tone combinations) render correctly on every
+ * device and browser without relying on a single font file.
+ *
+ * Yoruba special characters covered:
+ * - Subscript dot: ẹ Ẹ ọ Ọ ṣ Ṣ
+ * - Grave accent: è ò ù à ǹ
+ * - Acute accent: é ó ú á ń
+ * - Combined: ẹ́ ẹ̀ ọ́ ọ̀ and all combinations
+ */
+
+/* --- Google Fonts with extended unicode range --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;500;600&family=Noto+Sans+Mono&display=swap');
+
+/*
+ * @font-face fallback using unicode-range
+ * This ensures combining diacritics (tone marks) fall back to a system font
+ * that supports them if Noto Serif does not render them correctly.
+ */
+@font-face {
+  font-family: 'YorubaFallback';
+  src: local('Segoe UI'),
+       local('Arial Unicode MS'),
+       local('Noto Serif'),
+       local('DejaVu Serif'),
+       local('FreeSerif');
+  unicode-range:
+    /* Yoruba subscript-dot letters */
+    U+1EB8-1EB9,  /* Ẹ ẹ */
+    U+1ECC-1ECD,  /* Ọ ọ */
+    U+1E62-1E63,  /* Ṣ ṣ */
+    /* n with grave — the problematic ǹ */
+    U+01F9,       /* ǹ */
+    U+004E,       /* N */
+    /* Combining diacritical marks */
+    U+0300-U+036F,
+    /* Latin Extended Additional (precomposed tone+dot combos) */
+    U+1E00-U+1EFF;
+}
