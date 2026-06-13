@@ -16,6 +16,6 @@ examples:
   - yoruba: "Ó rí ìjẹgbárun gẹ́gẹ́ bí ibùsádi ìgbẹ̀yìn láti mórí bọ́ lọ́wọ́ àwọn àjẹẹ́lẹ̀ owó ìtọ́jú."
     english: "She saw bankruptcy as a last resort to escape medical bills."
 related:
-  - "Ajẹgbárun"
-  - "Àṣẹ ìjẹgbárun"
+  - ""
+  - ""
 ---
