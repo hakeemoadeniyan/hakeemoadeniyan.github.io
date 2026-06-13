@@ -19,9 +19,14 @@
   --green:       #2e7d32;
   --radius:      6px;
   --shadow:      0 2px 12px rgba(26,26,78,0.08);
-  --font-display: 'Noto Serif', Georgia, serif;
-  --font-body:    'Inter', system-ui, sans-serif;
-  --font-mono:    'Noto Sans Mono', monospace;
+  /*
+   * Font stack designed for full Yoruba Unicode support.
+   * Each stack falls back to fonts with broad Unicode coverage.
+   * 'Arial Unicode MS' and 'Noto Serif' both support all Yoruba characters.
+   */
+  --font-display: 'Noto Serif', 'Arial Unicode MS', 'DejaVu Serif', Georgia, serif;
+  --font-body:    'Noto Sans', 'Arial Unicode MS', 'DejaVu Sans', system-ui, sans-serif;
+  --font-mono:    'Noto Sans Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
 }
 
 /* --- Reset --- */
@@ -317,8 +322,11 @@ img { max-width: 100%; display: block; }
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--indigo-900);
-  line-height: 1.3;
+  line-height: 1.4;
   margin-bottom: 0.3rem;
+  font-variant-ligatures: none;
+  font-feature-settings: "kern" 1, "liga" 0;
+  text-rendering: optimizeLegibility;
 }
 .card-english {
   font-size: 0.88rem;
@@ -392,8 +400,12 @@ img { max-width: 100%; display: block; }
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 700;
   color: var(--indigo-900);
-  line-height: 1.1;
+  line-height: 1.3; /* increased for Yoruba combining diacritics */
   margin-bottom: 0.5rem;
+  font-variant-ligatures: none; /* prevents ligature conflicts with tone marks */
+  font-feature-settings: "kern" 1, "liga" 0; /* disable ligatures, keep kerning */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 .word-english {
   font-size: 1.2rem;
@@ -625,4 +637,27 @@ img { max-width: 100%; display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ===================================================
+   RIS DOWNLOAD BLOCK
+   =================================================== */
+.ris-block {
+  border-top: 2px dashed var(--ochre);
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+}
+.ris-description {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+.ris-btn {
+  background: var(--ochre);
+  font-size: 0.9rem;
+  padding: 0.55rem 1.25rem;
+}
+.ris-btn:hover {
+  background: #a86c08;
 }
