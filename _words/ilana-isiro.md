@@ -21,6 +21,6 @@ examples:
   - yoruba: "Ìlànà ìṣirò yìí ní ìgbésẹ̀ márùn-ún."
     english: "This algorithm has five steps."
 related:
-  - "Kọ̀ǹpútà"
-  - "Ìmọ̀jinlẹ̀ kọ̀ǹpútà"
+  - ""
+  - ""
 ---
