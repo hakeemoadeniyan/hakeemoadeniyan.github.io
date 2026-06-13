@@ -21,10 +21,18 @@
 
   <title>{{ page.title | default: site.title }} — Yoruba Terminology Dictionary</title>
 
-  <!-- Google Fonts: Noto Serif for display, Inter for body -->
+  <!-- Fonts: comprehensive Yoruba character support -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Noto+Sans+Mono&display=swap" rel="stylesheet" />
+  <!--
+    Load multiple Noto variants to guarantee full Yoruba Unicode coverage.
+    Noto Serif: headings and Yoruba terms
+    Noto Sans: body text
+    Noto Sans Mono: citation blocks
+    The unicode-range in fonts.css handles fallback for combining diacritics.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&family=Noto+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}" />
 
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
 
@@ -33,7 +41,6 @@
   {{ page.schema | jsonify }}
   </script>
   {% endif %}
-  <meta name="google-site-verification" content="LdGWtvjezOhwCe2QBxI2JtBPd4gJTxJcmgmLlKnQceU" />
 </head>
 <body>
 
