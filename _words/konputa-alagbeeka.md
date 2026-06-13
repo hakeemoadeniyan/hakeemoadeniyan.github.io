@@ -18,7 +18,7 @@ examples:
     english: "I took my laptop computer to school yesterday."
   - yoruba: "Kọ̀ǹpútà alágbèéká yìí ní agbára tó tó fún iṣẹ́ ète ajẹmáwòrán."
     english: "This laptop computer is powerful enough for graphic design work."
-  - yoruba: "Bátìrì kọ̀ǹpútà alágbèéká mi ti kú, mo nílò iná."
+  - yoruba: "Bátìrì kọ̀ǹpútà alágbèéká mi ti kú, mo nílò iná."
     english: "My laptop battery is dead, I need power."
 related:
   - ""
