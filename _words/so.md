@@ -7,7 +7,7 @@ subject: "General Knowledge"
 date_coined: "2026-06-14"
 author: "Hakeem Oluwafemi Adeniyan"
 definition: >
-  ṣ.ọ́. tàbí ṢỌ́ jẹ́ ìgékúrú fún "ṣáájú ọjọ́kanrí". Ṣáájú ọjọ́kanrí túmọ̀ sí kí oòrùn tó dé ọ̀gangan àtàrí, ní àárọ̀. (am, AM, or a.m. is the abbreviation of ante meridiem. Ante meridiem means "before noon, in the morning".)
+  ṣ.ọ́. tàbí ṢỌ́ jẹ́ ìgékúrú fún **ṣáájú ọjọ́kanrí**. Ṣáájú ọjọ́kanrí túmọ̀ sí kí oòrùn tó dé ọ̀gangan àtàrí, ní àárọ̀. (am, AM, or a.m. is the abbreviation of **ante meridiem**. Ante meridiem means "before noon, in the morning".)
 formation: >
   Ṣáájú ọjọ́kanrí túmọ̀ sí kí oòrùn tó dé ọ̀gangan àtàrí. Oòrùn sábà máa ń dé ọgangan àtàrí ní aago méjìlá ọ̀sán.
 examples:
