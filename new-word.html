@@ -1,1 +1,672 @@
+---
+layout: default
+title: "Add New Word"
+description: "Add a new coined Yoruba word to the dictionary."
+permalink: /new-word/
+---
 
+<div class="new-word-page">
+  <div class="container">
+
+    <div class="form-header">
+      <h1>Add New Coined Word</h1>
+      <p>Fill in all fields below. The entry will be submitted directly to your dictionary.</p>
+    </div>
+
+    <!-- TOKEN GATE -->
+    <div class="token-gate" id="token-gate">
+      <div class="token-box">
+        <label for="gh-token">GitHub Personal Access Token</label>
+        <p class="field-hint">Required to submit entries. Your token is never stored — it only lives in this browser tab.</p>
+        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+        <button class="btn-primary" onclick="unlockForm()">Unlock Form</button>
+        <p class="token-help">
+          To generate a token: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → select <strong>repo</strong> scope → Generate.
+        </p>
+      </div>
+    </div>
+
+    <!-- MAIN FORM -->
+    <form id="word-form" class="word-form hidden" onsubmit="return false;">
+
+      <!-- REFERENCE PANEL -->
+      <div class="reference-panel">
+        <div class="reference-header" onclick="toggleReference()">
+          <span>📖 English Reference Panel — expand to see prompts while writing Yoruba</span>
+          <span id="ref-toggle-icon">▼</span>
+        </div>
+        <div class="reference-body" id="reference-body">
+          <div class="ref-grid">
+            <div class="ref-item">
+              <strong>Definition prompt:</strong>
+              <p>Write what the English term means in plain language. Then translate that meaning into Yoruba for the Definition field.</p>
+            </div>
+            <div class="ref-item">
+              <strong>Formation prompt:</strong>
+              <p>Write which Yoruba roots you used and why. Explain the phonological or semantic process step by step.</p>
+            </div>
+            <div class="ref-item">
+              <strong>Example sentences:</strong>
+              <p>Think of a natural English sentence using the term. Then write the Yoruba equivalent.</p>
+              <ul>
+                <li>The laptop battery is dead.</li>
+                <li>This algorithm has five steps.</li>
+                <li>Supply exceeds demand today.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="ref-notes" id="ref-notes-area">
+            <label for="ref-notes">Your working notes (not submitted — for your eyes only)</label>
+            <textarea id="ref-notes" rows="4" placeholder="Write your English drafts here as you work. e.g. 'Definition in English: a portable computing device...' This text is never submitted."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM FIELDS -->
+      <div class="form-grid">
+
+        <!-- Yoruba Term -->
+        <div class="field-group full-width">
+          <label for="yoruba_term">Yoruba Term <span class="required">*</span></label>
+          <p class="field-hint">The coined Yoruba word with all tone marks.</p>
+          <input type="text" id="yoruba_term" placeholder="e.g. Kọ̀ǹpútà alágbèéká" required />
+        </div>
+
+        <!-- English Meaning -->
+        <div class="field-group full-width">
+          <label for="english_meaning">English Meaning <span class="required">*</span></label>
+          <p class="field-hint">The English term this Yoruba word translates.</p>
+          <input type="text" id="english_meaning" placeholder="e.g. Laptop computer" required />
+        </div>
+
+        <!-- Subject -->
+        <div class="field-group half-width">
+          <label for="subject">Subject Area <span class="required">*</span></label>
+          <select id="subject" required>
+            <option value="Technology">Technology</option>
+            <option value="Science">Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Education">Education</option>
+            <option value="Economics">Economics</option>
+            <option value="General Knowledge">General Knowledge</option>
+          </select>
+        </div>
+
+        <!-- Date Coined -->
+        <div class="field-group half-width">
+          <label for="date_coined">Date Coined <span class="required">*</span></label>
+          <input type="date" id="date_coined" required />
+        </div>
+
+        <!-- Slug -->
+        <div class="field-group full-width">
+          <label for="slug">URL Slug <span class="required">*</span></label>
+          <p class="field-hint">Lowercase, hyphens only, no tone marks. This becomes the page URL. e.g. <strong>konputa-alagbeeka</strong></p>
+          <div class="slug-row">
+            <span class="slug-prefix">hakeemoadeniyan.github.io/dictionary/</span>
+            <input type="text" id="slug" placeholder="konputa-alagbeeka" pattern="[a-z0-9\-]+" required />
+            <span class="slug-suffix">/</span>
+          </div>
+        </div>
+
+        <!-- Definition -->
+        <div class="field-group full-width">
+          <label for="definition">Definition <span class="required">*</span></label>
+          <p class="field-hint">Yoruba definition first, then English translation in parentheses.</p>
+          <textarea id="definition" rows="5" placeholder="Kọ̀ǹpútà alágbèéká jẹ́ ẹ̀rọ ìṣirò... (A laptop computer is a portable computing device...)" required></textarea>
+        </div>
+
+        <!-- Formation -->
+        <div class="field-group full-width">
+          <label for="formation">Formation Explanation <span class="required">*</span></label>
+          <p class="field-hint">Explain the Yoruba roots used and the coinage process. Use **word** for bold.</p>
+          <textarea id="formation" rows="5" placeholder="The term combines **Kọ̀ǹpútà** — a phonological adaptation of 'computer'..." required></textarea>
+        </div>
+
+        <!-- Examples -->
+        <div class="field-group full-width">
+          <label>Usage Examples</label>
+        </div>
+
+        <div class="field-group full-width example-block">
+          <div class="example-label">Example 1 <span class="required">*</span></div>
+          <div class="example-pair">
+            <div class="example-field">
+              <label for="ex1_yo">Yoruba sentence</label>
+              <textarea id="ex1_yo" rows="2" placeholder="Mo gbé kọ̀ǹpútà alágbèéká mi lọ sí ilé-ẹ̀kọ́." required></textarea>
+            </div>
+            <div class="example-field">
+              <label for="ex1_en">English translation</label>
+              <textarea id="ex1_en" rows="2" placeholder="I took my laptop to school." required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group full-width example-block">
+          <div class="example-label">Example 2 (optional)</div>
+          <div class="example-pair">
+            <div class="example-field">
+              <label for="ex2_yo">Yoruba sentence</label>
+              <textarea id="ex2_yo" rows="2" placeholder="Optional second example..."></textarea>
+            </div>
+            <div class="example-field">
+              <label for="ex2_en">English translation</label>
+              <textarea id="ex2_en" rows="2" placeholder="Optional translation..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group full-width example-block">
+          <div class="example-label">Example 3 (optional)</div>
+          <div class="example-pair">
+            <div class="example-field">
+              <label for="ex3_yo">Yoruba sentence</label>
+              <textarea id="ex3_yo" rows="2" placeholder="Optional third example..."></textarea>
+            </div>
+            <div class="example-field">
+              <label for="ex3_en">English translation</label>
+              <textarea id="ex3_en" rows="2" placeholder="Optional translation..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Terms -->
+        <div class="field-group full-width">
+          <label for="related">Related Terms (optional)</label>
+          <p class="field-hint">Comma separated Yoruba terms. e.g. Kọ̀ǹpútà, Ìmọ̀ ẹ̀rọ</p>
+          <input type="text" id="related" placeholder="Kọ̀ǹpútà, Ìmọ̀ ẹ̀rọ" />
+        </div>
+
+      </div>
+
+      <!-- PREVIEW -->
+      <div class="preview-section">
+        <button type="button" class="btn-secondary" onclick="generatePreview()">Preview Entry</button>
+        <div id="preview-box" class="preview-box hidden">
+          <div class="preview-header">Preview — this is how your file will look</div>
+          <pre id="preview-content"></pre>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-section">
+        <button type="button" class="btn-submit" id="submit-btn" onclick="submitWord()">
+          Submit Word Entry
+        </button>
+        <p class="submit-note">This will create the file in your GitHub repository and trigger a site rebuild.</p>
+      </div>
+
+      <!-- STATUS -->
+      <div id="status-box" class="status-box hidden"></div>
+
+    </form>
+
+  </div>
+</div>
+
+<style>
+.new-word-page {
+  padding: 2rem 0 4rem;
+}
+.form-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+.form-header h1 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--indigo-900);
+  margin-bottom: 0.4rem;
+}
+.form-header p {
+  color: var(--ink-muted);
+}
+
+/* Token gate */
+.token-gate { margin-bottom: 2rem; }
+.token-box {
+  background: var(--ochre-light);
+  border: 2px solid var(--ochre);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 600px;
+}
+.token-box label {
+  display: block;
+  font-weight: 600;
+  color: var(--indigo-900);
+  margin-bottom: 0.4rem;
+}
+.token-box input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  background: var(--white);
+}
+.token-help {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+/* Form */
+.word-form.hidden { display: none; }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.field-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.full-width { grid-column: 1 / -1; }
+.half-width { grid-column: span 1; }
+.field-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--indigo-900);
+}
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.required { color: var(--ochre); }
+.field-group input[type="text"],
+.field-group input[type="date"],
+.field-group input[type="password"],
+.field-group select,
+.field-group textarea {
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--white);
+  transition: border-color 0.15s;
+  width: 100%;
+  resize: vertical;
+}
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  outline: none;
+  border-color: var(--indigo-700);
+}
+
+/* Slug row */
+.slug-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color 0.15s;
+}
+.slug-row:focus-within { border-color: var(--indigo-700); }
+.slug-prefix, .slug-suffix {
+  padding: 0.7rem 0.75rem;
+  background: var(--indigo-100);
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+.slug-row input {
+  border: none !important;
+  border-radius: 0 !important;
+  flex: 1;
+  min-width: 0;
+}
+.slug-row input:focus { outline: none; }
+
+/* Examples */
+.example-block {
+  background: var(--indigo-100);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+.example-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--indigo-700);
+  margin-bottom: 0.75rem;
+}
+.example-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.example-field label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.3rem;
+}
+
+/* Reference panel */
+.reference-panel {
+  margin-bottom: 2rem;
+  border: 2px solid var(--ochre);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.reference-header {
+  background: var(--ochre-light);
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--indigo-900);
+  user-select: none;
+}
+.reference-body {
+  padding: 1.25rem;
+  display: none;
+}
+.reference-body.open { display: block; }
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.ref-item {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+.ref-item strong { color: var(--indigo-700); display: block; margin-bottom: 0.4rem; }
+.ref-item ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+.ref-notes label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--indigo-900);
+  margin-bottom: 0.4rem;
+}
+.ref-notes textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  resize: vertical;
+  background: var(--white);
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .btn-submit {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary {
+  background: var(--indigo-900);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--indigo-700); }
+.btn-secondary {
+  background: var(--indigo-100);
+  color: var(--indigo-900);
+}
+.btn-secondary:hover { background: var(--border); }
+.btn-submit {
+  background: var(--ochre);
+  color: var(--white);
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
+}
+.btn-submit:hover { background: #a06808; }
+.btn-submit:disabled { background: var(--border); cursor: not-allowed; }
+
+/* Preview */
+.preview-section { margin-bottom: 2rem; }
+.preview-box { margin-top: 1rem; }
+.preview-box.hidden { display: none; }
+.preview-header {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+.preview-box pre {
+  background: var(--indigo-900);
+  color: #a8d8a8;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Submit */
+.submit-section { margin-bottom: 1.5rem; }
+.submit-note {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 0.5rem;
+}
+
+/* Status */
+.status-box {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+.status-box.hidden { display: none; }
+.status-box.success {
+  background: #e8f5e9;
+  border: 2px solid #2e7d32;
+  color: #1b5e20;
+}
+.status-box.error {
+  background: #ffebee;
+  border: 2px solid #c62828;
+  color: #b71c1c;
+}
+.status-box.loading {
+  background: var(--indigo-100);
+  border: 2px solid var(--indigo-700);
+  color: var(--indigo-900);
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .half-width { grid-column: 1 / -1; }
+  .example-pair { grid-template-columns: 1fr; }
+  .ref-grid { grid-template-columns: 1fr; }
+  .slug-prefix { display: none; }
+}
+</style>
+
+<script>
+// ===================================================
+// Yoruba Dictionary — New Word Submission Form
+// Submits directly to GitHub via the Contents API
+// ===================================================
+
+const REPO_OWNER = 'hakeemoadeniyan';
+const REPO_NAME  = 'hakeemoadeniyan.github.io';
+const BRANCH     = 'main';
+
+let ghToken = '';
+
+function unlockForm() {
+  const input = document.getElementById('gh-token').value.trim();
+  if (!input.startsWith('ghp_') && !input.startsWith('github_pat_')) {
+    showStatus('Please enter a valid GitHub Personal Access Token (starts with ghp_ or github_pat_).', 'error');
+    return;
+  }
+  ghToken = input;
+  document.getElementById('token-gate').style.display = 'none';
+  document.getElementById('word-form').classList.remove('hidden');
+  // Set today's date as default
+  document.getElementById('date_coined').value = new Date().toISOString().split('T')[0];
+}
+
+function toggleReference() {
+  const body = document.getElementById('reference-body');
+  const icon = document.getElementById('ref-toggle-icon');
+  body.classList.toggle('open');
+  icon.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+function buildFileContent() {
+  const yoruba_term    = document.getElementById('yoruba_term').value.trim();
+  const english_meaning = document.getElementById('english_meaning').value.trim();
+  const subject        = document.getElementById('subject').value;
+  const date_coined    = document.getElementById('date_coined').value;
+  const definition     = document.getElementById('definition').value.trim();
+  const formation      = document.getElementById('formation').value.trim();
+  const ex1_yo         = document.getElementById('ex1_yo').value.trim();
+  const ex1_en         = document.getElementById('ex1_en').value.trim();
+  const ex2_yo         = document.getElementById('ex2_yo').value.trim();
+  const ex2_en         = document.getElementById('ex2_en').value.trim();
+  const ex3_yo         = document.getElementById('ex3_yo').value.trim();
+  const ex3_en         = document.getElementById('ex3_en').value.trim();
+  const related        = document.getElementById('related').value.trim();
+
+  // Build examples block
+  let examplesBlock = `examples:\n  - yoruba: "${ex1_yo}"\n    english: "${ex1_en}"`;
+  if (ex2_yo) examplesBlock += `\n  - yoruba: "${ex2_yo}"\n    english: "${ex2_en}"`;
+  if (ex3_yo) examplesBlock += `\n  - yoruba: "${ex3_yo}"\n    english: "${ex3_en}"`;
+
+  // Build related block
+  let relatedBlock = '';
+  if (related) {
+    const terms = related.split(',').map(t => t.trim()).filter(t => t);
+    relatedBlock = `related:\n` + terms.map(t => `  - "${t}"`).join('\n') + '\n';
+  }
+
+  // Build definition and formation with proper YAML block scalar
+  const defLines  = definition.split('\n').map(l => '  ' + l).join('\n');
+  const formLines = formation.split('\n').map(l => '  ' + l).join('\n');
+
+  return `---
+layout: dictionary
+title: "${yoruba_term}"
+yoruba_term: "${yoruba_term}"
+english_meaning: "${english_meaning}"
+subject: "${subject}"
+date_coined: "${date_coined}"
+author: "Hakeem Oluwafemi Adeniyan"
+definition: >
+${defLines}
+formation: >
+${formLines}
+${examplesBlock}
+${relatedBlock}---
+`;
+}
+
+function generatePreview() {
+  const content = buildFileContent();
+  document.getElementById('preview-content').textContent = content;
+  document.getElementById('preview-box').classList.remove('hidden');
+  document.getElementById('preview-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function submitWord() {
+  const slug = document.getElementById('slug').value.trim();
+  if (!slug) { showStatus('Please enter a URL slug.', 'error'); return; }
+  if (!/^[a-z0-9\-]+$/.test(slug)) {
+    showStatus('Slug must be lowercase letters, numbers, and hyphens only. No tone marks.', 'error');
+    return;
+  }
+
+  const yoruba_term = document.getElementById('yoruba_term').value.trim();
+  const english_meaning = document.getElementById('english_meaning').value.trim();
+  if (!yoruba_term || !english_meaning) {
+    showStatus('Please fill in the Yoruba term and English meaning.', 'error');
+    return;
+  }
+
+  const content = buildFileContent();
+  const filePath = `_words/${slug}.md`;
+  const encoded  = btoa(unescape(encodeURIComponent(content)));
+
+  showStatus('Submitting to GitHub...', 'loading');
+  document.getElementById('submit-btn').disabled = true;
+
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${ghToken}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({
+          message: `Add new word: ${yoruba_term} (${english_meaning})`,
+          content: encoded,
+          branch: BRANCH
+        })
+      }
+    );
+
+    if (response.status === 201) {
+      showStatus(
+        `✅ Success! "<strong>${yoruba_term}</strong>" has been added to your dictionary.<br><br>
+        Your site will rebuild in about 2 minutes. Then visit:<br>
+        <a href="https://hakeemoadeniyan.github.io/dictionary/${slug}/" target="_blank">
+        https://hakeemoadeniyan.github.io/dictionary/${slug}/</a>`,
+        'success'
+      );
+      document.getElementById('submit-btn').disabled = false;
+      // Clear form for next entry
+      document.getElementById('word-form').reset();
+      document.getElementById('date_coined').value = new Date().toISOString().split('T')[0];
+      document.getElementById('preview-box').classList.add('hidden');
+    } else if (response.status === 422) {
+      showStatus('A file with this slug already exists. Please choose a different slug.', 'error');
+      document.getElementById('submit-btn').disabled = false;
+    } else if (response.status === 401) {
+      showStatus('Token rejected by GitHub. Please check your token has the <strong>repo</strong> scope and has not expired.', 'error');
+      document.getElementById('submit-btn').disabled = false;
+    } else {
+      const data = await response.json();
+      showStatus(`GitHub error ${response.status}: ${data.message || 'Unknown error'}`, 'error');
+      document.getElementById('submit-btn').disabled = false;
+    }
+  } catch (err) {
+    showStatus(`Network error: ${err.message}. Check your internet connection and try again.`, 'error');
+    document.getElementById('submit-btn').disabled = false;
+  }
+}
+
+function showStatus(message, type) {
+  const box = document.getElementById('status-box');
+  box.innerHTML = message;
+  box.className = `status-box ${type}`;
+  box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
