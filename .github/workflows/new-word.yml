@@ -1,0 +1,147 @@
+name: Add New Word Entry
+
+on:
+  workflow_dispatch:
+    inputs:
+      yoruba_term:
+        description: 'Yoruba term (with all tone marks)'
+        required: true
+      english_meaning:
+        description: 'English meaning'
+        required: true
+      subject:
+        description: 'Subject area'
+        required: true
+        default: 'Technology'
+        type: choice
+        options:
+          - Technology
+          - Science
+          - Mathematics
+          - Education
+          - Economics
+          - General Knowledge
+      date_coined:
+        description: 'Date coined (YYYY-MM-DD format e.g. 2026-06-14)'
+        required: true
+      definition:
+        description: 'Definition — Yoruba first, then English in parentheses'
+        required: true
+      formation:
+        description: 'Formation explanation — what Yoruba roots, what process'
+        required: true
+      example1_yoruba:
+        description: 'Example 1 — Yoruba sentence'
+        required: true
+      example1_english:
+        description: 'Example 1 — English translation'
+        required: true
+      example2_yoruba:
+        description: 'Example 2 — Yoruba sentence'
+        required: false
+      example2_english:
+        description: 'Example 2 — English translation'
+        required: false
+      example3_yoruba:
+        description: 'Example 3 — Yoruba sentence (optional)'
+        required: false
+      example3_english:
+        description: 'Example 3 — English translation (optional)'
+        required: false
+      related:
+        description: 'Related Yoruba terms (comma separated, optional)'
+        required: false
+      slug:
+        description: 'URL slug — lowercase, hyphens only, no tone marks (e.g. ijegbarun, ilana-isiro)'
+        required: true
+
+jobs:
+  create-word-entry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create word entry file
+        env:
+          YORUBA_TERM: ${{ github.event.inputs.yoruba_term }}
+          ENGLISH_MEANING: ${{ github.event.inputs.english_meaning }}
+          SUBJECT: ${{ github.event.inputs.subject }}
+          DATE_COINED: ${{ github.event.inputs.date_coined }}
+          DEFINITION: ${{ github.event.inputs.definition }}
+          FORMATION: ${{ github.event.inputs.formation }}
+          EXAMPLE1_YO: ${{ github.event.inputs.example1_yoruba }}
+          EXAMPLE1_EN: ${{ github.event.inputs.example1_english }}
+          EXAMPLE2_YO: ${{ github.event.inputs.example2_yoruba }}
+          EXAMPLE2_EN: ${{ github.event.inputs.example2_english }}
+          EXAMPLE3_YO: ${{ github.event.inputs.example3_yoruba }}
+          EXAMPLE3_EN: ${{ github.event.inputs.example3_english }}
+          RELATED: ${{ github.event.inputs.related }}
+          SLUG: ${{ github.event.inputs.slug }}
+        run: |
+          FILE="_words/${SLUG}.md"
+
+          # Build the front matter
+          {
+            echo "---"
+            echo "layout: dictionary"
+            echo "title: \"${YORUBA_TERM}\""
+            echo "yoruba_term: \"${YORUBA_TERM}\""
+            echo "english_meaning: \"${ENGLISH_MEANING}\""
+            echo "subject: \"${SUBJECT}\""
+            echo "date_coined: \"${DATE_COINED}\""
+            echo "author: \"Hakeem Oluwafemi Adeniyan\""
+            echo "definition: >"
+            echo "  ${DEFINITION}"
+            echo "formation: >"
+            echo "  ${FORMATION}"
+            echo "examples:"
+            echo "  - yoruba: \"${EXAMPLE1_YO}\""
+            echo "    english: \"${EXAMPLE1_EN}\""
+
+            # Only add example 2 if provided
+            if [ -n "${EXAMPLE2_YO}" ]; then
+              echo "  - yoruba: \"${EXAMPLE2_YO}\""
+              echo "    english: \"${EXAMPLE2_EN}\""
+            fi
+
+            # Only add example 3 if provided
+            if [ -n "${EXAMPLE3_YO}" ]; then
+              echo "  - yoruba: \"${EXAMPLE3_YO}\""
+              echo "    english: \"${EXAMPLE3_EN}\""
+            fi
+
+            # Only add related terms if provided
+            if [ -n "${RELATED}" ]; then
+              echo "related:"
+              # Split comma-separated related terms into list items
+              IFS=',' read -ra TERMS <<< "${RELATED}"
+              for TERM in "${TERMS[@]}"; do
+                TERM="${TERM#"${TERM%%[![:space:]]*}"}" # trim leading spaces
+                echo "  - \"${TERM}\""
+              done
+            fi
+
+            echo "---"
+          } > "$FILE"
+
+          echo "File created: $FILE"
+          cat "$FILE"
+
+      - name: Commit new word entry
+        run: |
+          git config user.name "Hakeem Oluwafemi Adeniyan"
+          git config user.email "hakeemoadeniyan@users.noreply.github.com"
+          git add "_words/${{ github.event.inputs.slug }}.md"
+          git commit -m "Add new word: ${{ github.event.inputs.yoruba_term }} (${{ github.event.inputs.english_meaning }})"
+          git push
+
+      - name: Summary
+        run: |
+          echo "✅ New word entry created successfully"
+          echo "Yoruba term: ${{ github.event.inputs.yoruba_term }}"
+          echo "English meaning: ${{ github.event.inputs.english_meaning }}"
+          echo "Live URL: https://hakeemoadeniyan.github.io/dictionary/${{ github.event.inputs.slug }}/"
