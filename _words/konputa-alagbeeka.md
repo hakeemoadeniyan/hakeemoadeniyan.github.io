@@ -7,7 +7,7 @@ subject: "Technology"
 date_coined: "2026-06-07"
 author: "Hakeem Oluwafemi Adeniyan"
 definition: >
-  Kọ̀ǹpútà alágbèéká jẹ́ irin-èlò ìṣirò kan tó ṣeé gbé káàkiri, tó ní ọpọ́n-ìtẹ̀wé lára àti gàgá kan tó máa ń padé. A máa ń lò ó ní ọ́fíìsì, ilé-ẹ̀kọ́, àti ibi tí kò sí ìpèsè iná tó já gaara nítorí pé ó ń lo bátìric aṣeétúnkì.
+  Kọ̀ǹpútà alágbèéká jẹ́ irin-èlò ìṣirò kan tó ṣeé gbé káàkiri, tó ní ọpọ́n-ìtẹ̀wé lára àti gàgá kan tó máa ń padé. A máa ń lò ó ní ọ́fíìsì, ilé-ẹ̀kọ́, àti ibi tí kò sí ìpèsè iná tó já gaara nítorí pé ó ń lo bátìrì aṣeétúnkì.
   (A laptop computer is a portable computing device with an integrated keyboard and a screen that folds shut.
   It is used in offices, schools, and locations without a fixed power supply, running on a rechargeable battery.)
 formation: >
