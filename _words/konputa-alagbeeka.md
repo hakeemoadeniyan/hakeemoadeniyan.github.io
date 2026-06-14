@@ -1,7 +1,7 @@
 ---
 layout: dictionary
-title: "Kọ̀ǹpútà alágbèéká"
-yoruba_term: "Kọ̀ǹpútà alágbèéká"
+title: "Kọ̀ǹpútà alágbèéká"
+yoruba_term: "Kọ̀ǹpútà alágbèéká"
 english_meaning: "Laptop computer"
 subject: "Technology"
 date_coined: "2026-06-07"
