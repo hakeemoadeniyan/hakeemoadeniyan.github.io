@@ -1,7 +1,7 @@
 ---
 layout: dictionary
-title: "YORUBA TERM HERE"
-yoruba_term: "YORUBA TERM HERE"
+title: "Yoruba term here"
+yoruba_term: "Yoruba term here"
 english_meaning: "English meaning here"
 subject: "Technology"    # Options: Technology | Science | Mathematics | Education | Economics | General Knowledge
 date_coined: "2026-06-09"
