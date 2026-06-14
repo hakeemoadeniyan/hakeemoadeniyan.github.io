@@ -70,5 +70,24 @@
     </div>
   </footer>
 
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function normaliseNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var original = node.nodeValue;
+        var normalised = original.normalize('NFC');
+        if (original !== normalised) {
+          node.nodeValue = normalised;
+        }
+      } else {
+        for (var i = 0; i < node.childNodes.length; i++) {
+          normaliseNode(node.childNodes[i]);
+        }
+      }
+    }
+    normaliseNode(document.body);
+  });
+  </script>
+
 </body>
 </html>
