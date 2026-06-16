@@ -1,112 +1,130 @@
 ---
 layout: default
-title: "Dictionary"
-description: "Browse all coined Yoruba terms by Hakeem Oluwafemi Adeniyan."
-permalink: /dictionary/
 ---
 
-<div class="container">
-  <div class="dict-index-header">
-    <h1>Dictionary</h1>
-    <p>All coined Yoruba terms, listed in proper Yoruba alphabetical order. Each entry includes definition, formation, examples, and a citable APA reference.</p>
-  </div>
+{% assign coined_year = page.date_coined | date: "%Y" %}
+{% assign coined_month = page.date_coined | date: "%B" %}
+{% assign coined_day = page.date_coined | date: "%-d" %}
+{% assign page_url = page.url | absolute_url %}
+{% assign slug = page.url | remove: '/dictionary/' | remove: '/' %}
 
-  <div class="word-grid" id="word-grid">
-    {% assign all_words = site.words %}
-    {% for word in all_words %}
-    <a href="{{ word.url | relative_url }}" class="word-card"
-       data-yoruba="{{ word.yoruba_term }}">
-      <div class="card-subject">{{ word.subject }}</div>
-      <div class="card-yoruba">{{ word.yoruba_term }}</div>
-      <div class="card-english">{{ word.english_meaning }}</div>
-      <div class="card-date">Coined {{ word.date_coined | date: "%B %Y" }}</div>
-    </a>
-    {% endfor %}
+{% capture apa_formatted %}Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). *{{ page.yoruba_term }}* ({{ page.english_meaning }}). In *Yoruba Terminology Dictionary*. Retrieved from {{ page_url }}{% endcapture %}
+
+{% capture apa_plain %}Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). {{ page.yoruba_term }} ({{ page.english_meaning }}). In Yoruba Terminology Dictionary. Retrieved from {{ page_url }}{% endcapture %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": "{{ page.yoruba_term }}",
+  "description": "{{ page.english_meaning }} — {{ page.definition | strip_html | truncate: 200 }}",
+  "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Yoruba Terminology Dictionary",
+    "url": "https://hakeemoadeniyan.github.io"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hakeem Oluwafemi Adeniyan"
+  },
+  "dateCreated": "{{ page.date_coined }}"
+}
+</script>
+
+<article class="word-entry">
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a> ›
+      <a href="{{ '/dictionary/' | relative_url }}">Dictionary</a> ›
+      <span>{{ page.yoruba_term }}</span>
+    </nav>
+
+    <header class="word-header">
+      <div class="word-subject-tag">{{ page.subject }}</div>
+      <h1 class="word-yoruba">{{ page.yoruba_term }}</h1>
+      <p class="word-english">{{ page.english_meaning }}</p>
+      <p class="word-meta">Coined by <strong>Hakeem Oluwafemi Adeniyan</strong> · {{ page.date_coined | date: "%B %-d, %Y" }}</p>
+    </header>
+
+    <section class="word-section">
+      <h2>Definition</h2>
+      <div class="word-definition">{{ page.definition | markdownify }}</div>
+    </section>
+
+    {% if page.formation %}
+    <section class="word-section">
+      <h2>Formation</h2>
+      <div class="word-formation">{{ page.formation | markdownify }}</div>
+    </section>
+    {% endif %}
+
+    {% if page.examples %}
+    <section class="word-section">
+      <h2>Usage Examples</h2>
+      <ul class="word-examples">
+        {% for example in page.examples %}
+        <li>
+          <span class="example-yo">{{ example.yoruba }}</span>
+          <span class="example-en">{{ example.english }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if page.related %}
+    <section class="word-section">
+      <h2>Related Terms</h2>
+      <div class="related-tags">
+        {% for term in page.related %}
+        <a href="{{ '/dictionary/' | relative_url }}{{ term | slugify }}/" class="related-tag">{{ term }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <section class="word-section citation-section">
+      <h2>Cite This Entry</h2>
+      <p class="citation-note">APA 7th Edition</p>
+
+      <div class="citation-block">
+        <label class="citation-label">Formatted (APA with italics)</label>
+        <div class="citation-text" id="cite-formatted">Adeniyan, H. O. ({{ coined_year }}, {{ coined_month }} {{ coined_day }}). <em>{{ page.yoruba_term }}</em> ({{ page.english_meaning }}). In <em>Yoruba Terminology Dictionary</em>. Retrieved from {{ page_url }}</div>
+        <button class="copy-btn" onclick="copyCitation('cite-formatted', this)">Copy</button>
+      </div>
+
+      <div class="citation-block">
+        <label class="citation-label">Plain text</label>
+        <div class="citation-text" id="cite-plain">{{ apa_plain }}</div>
+        <button class="copy-btn" onclick="copyCitation('cite-plain', this)">Copy</button>
+      </div>
+    </section>
+
   </div>
-</div>
+</article>
 
 <script>
-// ===================================================
-// Yoruba Alphabetical Sort
-// Yoruba letter order: A B D E Ẹ F G GB H I J K L M N
-//                       O Ọ P R S Ṣ T U W Y
-// Tone marks (à á è é etc.) do NOT affect sort order —
-// only the base letter and dot-below character matter.
-// GB is treated as a single combined letter.
-// ===================================================
-
-const YORUBA_ORDER = [
-  'a', 'b', 'd', 'e', 'ẹ', 'f', 'g', 'gb', 'h', 'i', 'j', 'k',
-  'l', 'm', 'n', 'o', 'ọ', 'p', 'r', 's', 'ṣ', 't', 'u', 'w', 'y'
-];
-
-// Strip tone marks but KEEP dot-below characters (ẹ, ọ, ṣ)
-// because dot-below changes the letter identity, but tone
-// marks (à, á, ã) do not change sort position.
-function stripTones(str) {
-  return str
-    .normalize('NFD')                      // decompose accented chars
-    .replace(/[\u0300\u0301\u0303\u0304]/g, '') // remove grave, acute, tilde, macron (tone marks)
-    .normalize('NFC');                     // recompose (keeps ẹ, ọ, ṣ intact since dot-below is a different mark)
-}
-
-// Convert a Yoruba word into an array of sortable "letter units"
-// treating gb as one unit and dotted letters as one unit.
-function toYorubaUnits(word) {
-  const clean = stripTones(word.toLowerCase());
-  const units = [];
-  let i = 0;
-  while (i < clean.length) {
-    // Check for 'gb' digraph
-    if (clean[i] === 'g' && clean[i + 1] === 'b') {
-      units.push('gb');
-      i += 2;
-      continue;
-    }
-    units.push(clean[i]);
-    i += 1;
-  }
-  return units;
-}
-
-function yorubaCompare(wordA, wordB) {
-  const unitsA = toYorubaUnits(wordA);
-  const unitsB = toYorubaUnits(wordB);
-  const len = Math.max(unitsA.length, unitsB.length);
-
-  for (let i = 0; i < len; i++) {
-    const a = unitsA[i];
-    const b = unitsB[i];
-
-    if (a === undefined) return -1; // shorter word comes first
-    if (b === undefined) return 1;
-    if (a === b) continue;
-
-    const indexA = YORUBA_ORDER.indexOf(a);
-    const indexB = YORUBA_ORDER.indexOf(b);
-
-    // Fallback for any character not in our defined order
-    // (numbers, punctuation, etc.) — sort by char code
-    const rankA = indexA === -1 ? 999 + a.charCodeAt(0) : indexA;
-    const rankB = indexB === -1 ? 999 + b.charCodeAt(0) : indexB;
-
-    return rankA - rankB;
-  }
-  return 0;
-}
-
-// Run the sort once the page loads
-document.addEventListener('DOMContentLoaded', function () {
-  const grid = document.getElementById('word-grid');
-  const cards = Array.from(grid.querySelectorAll('.word-card'));
-
-  cards.sort((cardA, cardB) => {
-    const termA = cardA.dataset.yoruba;
-    const termB = cardB.dataset.yoruba;
-    return yorubaCompare(termA, termB);
+function copyCitation(id, btn) {
+  // Use innerText so HTML tags (like <em>) are stripped — copies clean plain text
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
   });
-
-  // Re-append in sorted order
-  cards.forEach(card => grid.appendChild(card));
-});
+}
 </script>
