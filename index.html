@@ -65,28 +65,9 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
 </div>
 
 <script>
-  // ===================================================
-  // Diacritic-insensitive search
-  // Strips Yoruba tone marks (à á ã) AND dot-below marks
-  // (ẹ ọ ṣ ǹ) down to plain Latin letters, so a search for
-  // "komputa" matches the stored term "Kọ̀ǹpútà".
-  // ===================================================
-  function toPlainLatin(str) {
-    return str
-      .normalize('NFD')
-      .replace(/[\u0300-\u0304\u0323]/g, '') // tone marks + dot-below
-      .normalize('NFC')
-      .toLowerCase();
-  }
-
   const cards = Array.from(document.querySelectorAll('.word-card'));
   let activeSubject = 'all';
   let searchTerm = '';
-
-  // Pre-compute plain-Latin versions once for performance
-  cards.forEach(card => {
-    card.dataset.plain = toPlainLatin(card.dataset.yoruba);
-  });
 
   // Stats
   document.getElementById('stat-total').textContent = cards.length;
@@ -97,12 +78,10 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
 
   function updateDisplay() {
     let visible = 0;
-    const plainSearchTerm = toPlainLatin(searchTerm);
     cards.forEach(card => {
       const subjectMatch = activeSubject === 'all' || card.dataset.subject === activeSubject;
       const termMatch = !searchTerm ||
-        card.dataset.yoruba.includes(searchTerm) ||      // exact match (with diacritics)
-        card.dataset.plain.includes(plainSearchTerm) ||   // diacritic-insensitive match
+        card.dataset.yoruba.includes(searchTerm) ||
         card.dataset.english.includes(searchTerm);
       const show = subjectMatch && termMatch;
       card.style.display = show ? '' : 'none';
