@@ -51,7 +51,9 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
     <a href="{{ word.url | relative_url }}" class="word-card"
        data-subject="{{ word.subject }}"
        data-yoruba="{{ word.yoruba_term | downcase }}"
-       data-english="{{ word.english_meaning | downcase }}">
+       data-english="{{ word.english_meaning | downcase }}"
+       data-yoruba-norm="{{ word.yoruba_term | normalize_yoruba | downcase }}"
+       data-english-norm="{{ word.english_meaning | normalize_yoruba | downcase }}">
       <div class="card-subject">{{ word.subject }}</div>
       <div class="card-yoruba">{{ word.yoruba_term }}</div>
       <div class="card-english">{{ word.english_meaning }}</div>
@@ -65,6 +67,56 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
 </div>
 
 <script>
+  // ===================================================
+  // NORMALIZATION FUNCTION
+  // Converts any Yoruba text to a plain ASCII equivalent
+  // Removes accents, tone marks, and special characters
+  // ===================================================
+  function normalizeYoruba(text) {
+    if (!text) return '';
+    
+    let normalized = text.toLowerCase().trim();
+    
+    // Replace all accented vowels with their base equivalents
+    // A, À, Á, Â, Ã, Ä, Å, Ā, Ă, Ą → a
+    normalized = normalized.replace(/[àáâãäåāăą]/g, 'a');
+    
+    // E, È, É, Ê, Ë, Ē, Ĕ, Ė, Ę, Ě → e
+    normalized = normalized.replace(/[èéêëēĕėęě]/g, 'e');
+    
+    // Ẹ → e (dotted E becomes plain e)
+    normalized = normalized.replace(/[ẹ]/g, 'e');
+    
+    // I, Ì, Í, Î, Ï, Ĩ, Ī, Ĭ, Į → i
+    normalized = normalized.replace(/[ìíîïĩīĭį]/g, 'i');
+    
+    // O, Ò, Ó, Ô, Õ, Ö, Ō, Ŏ, Ő → o
+    normalized = normalized.replace(/[òóôõöōŏő]/g, 'o');
+    
+    // Ọ → o (dotted O becomes plain o)
+    normalized = normalized.replace(/[ọ]/g, 'o');
+    
+    // U, Ù, Ú, Û, Ü, Ũ, Ū, Ŭ, Ů, Ű → u
+    normalized = normalized.replace(/[ùúûüũūŭůű]/g, 'u');
+    
+    // Ṣ → s (dotted S becomes plain s)
+    normalized = normalized.replace(/[ṣ]/g, 's');
+    
+    // Ǹ, ǹ, Ń, ń → n
+    normalized = normalized.replace(/[ǹń]/g, 'n');
+    
+    // Remove any remaining combining diacritical marks
+    normalized = normalized.replace(/[\u0300-\u036f]/g, '');
+    
+    // Remove punctuation (keep only letters, numbers, and spaces)
+    normalized = normalized.replace(/[^a-z0-9\s]/g, '');
+    
+    return normalized;
+  }
+
+  // ===================================================
+  // SEARCH AND FILTER LOGIC
+  // ===================================================
   const cards = Array.from(document.querySelectorAll('.word-card'));
   let activeSubject = 'all';
   let searchTerm = '';
@@ -78,15 +130,27 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
 
   function updateDisplay() {
     let visible = 0;
+    
+    // Normalize the search term once (for performance)
+    const searchNorm = normalizeYoruba(searchTerm);
+    
     cards.forEach(card => {
       const subjectMatch = activeSubject === 'all' || card.dataset.subject === activeSubject;
-      const termMatch = !searchTerm ||
-        card.dataset.yoruba.includes(searchTerm) ||
-        card.dataset.english.includes(searchTerm);
+      
+      // Get normalized values from data attributes (already pre-computed)
+      const yorubaNorm = card.dataset.yorubaNorm || '';
+      const englishNorm = card.dataset.englishNorm || '';
+      
+      // Check if search term exists in either normalized field
+      const termMatch = !searchTerm || 
+                        yorubaNorm.includes(searchNorm) || 
+                        englishNorm.includes(searchNorm);
+      
       const show = subjectMatch && termMatch;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
+    
     const countEl = document.getElementById('results-count');
     countEl.textContent = searchTerm || activeSubject !== 'all'
       ? `${visible} term${visible !== 1 ? 's' : ''} found`
@@ -108,7 +172,10 @@ description: "Scholarly reference for modern Yoruba terminology in science, tech
   }
 
   document.getElementById('search-input').addEventListener('input', function() {
-    searchTerm = this.value.toLowerCase().trim();
+    searchTerm = this.value.trim();
     updateDisplay();
   });
+
+  // Initial display
+  updateDisplay();
 </script>
