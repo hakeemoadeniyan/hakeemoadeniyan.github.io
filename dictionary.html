@@ -12,7 +12,13 @@ permalink: /dictionary/
   </div>
 
   <div class="word-grid">
-    {% assign all_words = site.words | sort: "yoruba_term" %}
+    {% comment %}
+      IMPORTANT: Use custom filter 'sort_by_yoruba' to sort in Yoruba alphabetical order
+      This ignores tone marks (`, ´) and treats ẹ=ọ=ṣ as e=o=s
+      The sorting follows: A, B, D, E, Ẹ, F, G, H, I, J, K, L, M, N, O, Ọ, P, R, S, Ṣ, T, U, W, Y
+    {% endcomment %}
+    {% assign all_words = site.words | sort_by_yoruba: "yoruba_term" %}
+    
     {% for word in all_words %}
     <a href="{{ word.url | relative_url }}" class="word-card">
       <div class="card-subject">{{ word.subject }}</div>
