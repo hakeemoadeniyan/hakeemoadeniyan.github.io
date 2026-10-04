@@ -13,9 +13,9 @@ formation: >
 examples:
   - yoruba: "Mo dé padà láti oko ni aago 11:00 ṣọ́ (aago mọ́kànlá ṣáájú ọjọ́kanrí)."
     english: "I came back from the farm at 11:00 a.m."
-  - yoruba: "Ó yẹ kí a dé ibi iṣẹ́ wa ní aago 7:45 ṣ.ọ́. (aago méje àti ogójì-àrún ṣáájú ọjọ́kanrí)."
+  - yoruba: "Ó yẹ kí a dé ibi iṣẹ́ wa ní aago 7:45 ṣ.ọ́. (aago méje àti ogójì-àrún ìṣẹ́jú ṣáájú ọjọ́kanrí)."
     english: "We should arrive at our place of work by 7:45 a.m. (seven forty-five a.m.)."
-  - yoruba: "Aago 9:05 ṣ.ọ́. (aago mẹ́sàn-án àti òdo àrún ṣáájú ọjọ́kanrí) ti lù."
+  - yoruba: "Aago 9:05 ṣ.ọ́. (aago mẹ́sàn-án àti òdo àrún ìṣẹ́jú ṣáájú ọjọ́kanrí) ti lù."
     english: "The time is 9:05 a.m."
   - yoruba: "Aago 1:00 ṣ.ọ́. (aago kan ṣáájú ọjọ́kanrí) ni mo jí."
     english: "I woke up by 1:00 a.m."
