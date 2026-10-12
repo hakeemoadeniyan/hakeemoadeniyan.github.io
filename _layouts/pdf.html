@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+<div class="container pdf-page">
+
+  <div class="pdf-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="pdf-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+    {% if page.description %}
+    <p class="pdf-description">{{ page.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="pdf-actions">
+    <a href="{{ page.pdf_file | relative_url }}"
+       class="btn-download"
+       download>
+      ⬇ Download PDF
+    </a>
+    <a href="{{ page.pdf_file | relative_url }}"
+       class="btn-open"
+       target="_blank"
+       rel="noopener">
+      ↗ Open in New Tab
+    </a>
+  </div>
+
+  <div class="pdf-viewer">
+    <iframe
+      src="{{ page.pdf_file | relative_url }}"
+      title="{{ page.title }} PDF"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="pdf-meta">
+    <p><strong>Author:</strong> {{ page.author | default: "Hakeem Oluwafemi Adeniyan" }}</p>
+    <p><strong>Published by:</strong> {{ page.publisher | default: "Rose of Wisdom Ventures" }}</p>
+    {% if page.license %}
+    <p><strong>License:</strong> {{ page.license }}</p>
+    {% endif %}
+  </div>
+
+</div>
+
+<style>
+/* (same styles as before — copy from your existing pdf.html) */
+.pdf-page { padding: 3rem 0 4rem; max-width: 1000px; }
+.pdf-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border); }
+.pdf-header h1 { font-family: var(--font-display); font-size: 2rem; color: var(--indigo-900); margin-bottom: 0.4rem; }
+.pdf-subtitle { color: var(--ochre); font-size: 1rem; font-style: italic; margin-bottom: 1rem; }
+.pdf-description { color: var(--ink-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+.pdf-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.btn-download, .btn-open { display: inline-block; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.15s, transform 0.1s; }
+.btn-download { background: var(--ochre); color: var(--white); }
+.btn-download:hover { background: #a86c08; text-decoration: none; transform: translateY(-1px); }
+.btn-open { background: var(--indigo-900); color: var(--white); }
+.btn-open:hover { background: var(--indigo-700); text-decoration: none; transform: translateY(-1px); }
+.pdf-viewer { border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--indigo-100); margin-bottom: 2rem; }
+.pdf-viewer iframe { width: 100%; height: 800px; border: none; display: block; }
+.pdf-meta { background: var(--indigo-100); border-left: 4px solid var(--indigo-700); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; font-size: 0.9rem; line-height: 1.8; color: var(--ink-muted); }
+.pdf-meta strong { color: var(--indigo-900); }
+@media (max-width: 600px) {
+  .pdf-viewer iframe { height: 500px; }
+  .pdf-actions { flex-direction: column; align-items: stretch; }
+  .btn-download, .btn-open { text-align: center; }
+}
+</style>
