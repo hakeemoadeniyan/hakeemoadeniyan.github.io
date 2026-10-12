@@ -21,7 +21,9 @@ collections:
   words:
     output: true
     permalink: /dictionary/:name/
-
+  pdfs:                                    
+    output: true
+    permalink: /pdf/:name/
 # Default front matter
 defaults:
   - scope:
