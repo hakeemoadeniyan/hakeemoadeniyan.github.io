@@ -1,71 +1,111 @@
 ---
 layout: default
+title: "PDF Library"
+description: "Downloadable PDF documents."
+permalink: /pdf/
 ---
 
-<div class="container pdf-page">
+<div class="container pdf-library">
 
-  <div class="pdf-header">
-    <h1>{{ page.title }}</h1>
-    {% if page.subtitle %}
-    <p class="pdf-subtitle">{{ page.subtitle }}</p>
-    {% endif %}
-    {% if page.description %}
-    <p class="pdf-description">{{ page.description }}</p>
-    {% endif %}
+  <div class="dict-index-header">
+    <h1>PDF Library</h1>
+    <p>Downloadable PDF documents by Hakeem Oluwafemi Adeniyan. Read online or download for offline use.</p>
   </div>
 
-  <div class="pdf-actions">
-    <a href="{{ page.pdf_file | relative_url }}"
-       class="btn-download"
-       download>
-      ⬇ Download PDF
+  <div class="pdf-grid">
+    {% assign all_pdfs = site.pdfs | sort: "title" %}
+    {% for doc in all_pdfs %}
+    <a href="{{ doc.url | relative_url }}" class="pdf-card">
+      <div class="pdf-icon">📄</div>
+      <h3 class="pdf-card-title">{{ doc.title }}</h3>
+      {% if doc.subtitle %}
+      <p class="pdf-card-subtitle">{{ doc.subtitle }}</p>
+      {% endif %}
+      <p class="pdf-card-desc">{{ doc.description | truncate: 120 }}</p>
+      <span class="pdf-card-link">Read or Download →</span>
     </a>
-    <a href="{{ page.pdf_file | relative_url }}"
-       class="btn-open"
-       target="_blank"
-       rel="noopener">
-      ↗ Open in New Tab
-    </a>
-  </div>
-
-  <div class="pdf-viewer">
-    <iframe
-      src="{{ page.pdf_file | relative_url }}"
-      title="{{ page.title }} PDF"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <div class="pdf-meta">
-    <p><strong>Author:</strong> {{ page.author | default: "Hakeem Oluwafemi Adeniyan" }}</p>
-    <p><strong>Published by:</strong> {{ page.publisher | default: "Rose of Wisdom Ventures" }}</p>
-    {% if page.license %}
-    <p><strong>License:</strong> {{ page.license }}</p>
-    {% endif %}
+    {% endfor %}
   </div>
 
 </div>
 
 <style>
-/* (same styles as before — copy from your existing pdf.html) */
-.pdf-page { padding: 3rem 0 4rem; max-width: 1000px; }
-.pdf-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border); }
-.pdf-header h1 { font-family: var(--font-display); font-size: 2rem; color: var(--indigo-900); margin-bottom: 0.4rem; }
-.pdf-subtitle { color: var(--ochre); font-size: 1rem; font-style: italic; margin-bottom: 1rem; }
-.pdf-description { color: var(--ink-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
-.pdf-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-.btn-download, .btn-open { display: inline-block; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.15s, transform 0.1s; }
-.btn-download { background: var(--ochre); color: var(--white); }
-.btn-download:hover { background: #a86c08; text-decoration: none; transform: translateY(-1px); }
-.btn-open { background: var(--indigo-900); color: var(--white); }
-.btn-open:hover { background: var(--indigo-700); text-decoration: none; transform: translateY(-1px); }
-.pdf-viewer { border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--indigo-100); margin-bottom: 2rem; }
-.pdf-viewer iframe { width: 100%; height: 800px; border: none; display: block; }
-.pdf-meta { background: var(--indigo-100); border-left: 4px solid var(--indigo-700); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; font-size: 0.9rem; line-height: 1.8; color: var(--ink-muted); }
-.pdf-meta strong { color: var(--indigo-900); }
+.pdf-library { padding: 2rem 0 4rem; }
+
+.pdf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 0 3rem;
+}
+
+.pdf-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.pdf-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ochre);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.2s;
+}
+.pdf-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  border-color: var(--indigo-100);
+  text-decoration: none;
+}
+.pdf-card:hover::before { transform: scaleY(1); }
+
+.pdf-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.pdf-card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--indigo-900);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+
+.pdf-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--ochre);
+  font-style: italic;
+  margin-bottom: 0.6rem;
+}
+
+.pdf-card-desc {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.pdf-card-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--indigo-700);
+}
+
 @media (max-width: 600px) {
-  .pdf-viewer iframe { height: 500px; }
-  .pdf-actions { flex-direction: column; align-items: stretch; }
-  .btn-download, .btn-open { text-align: center; }
+  .pdf-grid { grid-template-columns: 1fr; }
 }
 </style>
