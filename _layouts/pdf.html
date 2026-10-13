@@ -15,12 +15,19 @@ layout: default
   </div>
 
   <div class="pdf-actions">
-    <a href="{{ page.pdf_file | relative_url }}" class="btn-download" download>
-      ⬇ Download PDF
-    </a>
-    <a href="{{ page.pdf_file | relative_url }}" class="btn-open" target="_blank" rel="noopener">
-      ↗ Open in New Tab
-    </a>
+    <a href="{{ page.pdf_file | relative_url }}"
+   class="btn-download"
+   download
+   onclick="gtag('event', 'download_pdf', { 'pdf_name': '{{ page.title }}' });">
+  ⬇ Download PDF
+</a>
+<a href="{{ page.pdf_file | relative_url }}"
+   class="btn-open"
+   target="_blank"
+   rel="noopener"
+   onclick="gtag('event', 'open_pdf', { 'pdf_name': '{{ page.title }}' });">
+  ↗ Open in New Tab
+</a>
   </div>
 
   <div class="pdf-viewer">
