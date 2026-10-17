@@ -2,7 +2,7 @@
 layout: default
 title: "Number Converter"
 description: "Convert any number into the modern standardized Yoruba Number System."
-permalink: /converter/
+permalink: /number-converter/
 ---
 <div class="number-converter-wrapper">
     <div class="converter-container">
