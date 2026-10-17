@@ -580,6 +580,7 @@ permalink: /converter/
                 
                 resultDiv.classList.remove('error');
                 const yorubaWord = convertToYoruba(value);
+                gtag('event', 'use_number_converter', { 'number_typed': rawValue });
                 yorubaOutput.innerHTML = `<span class="yoruba-text">${yorubaWord}</span>`;
             } catch (error) {
                 yorubaOutput.textContent = "Number too large or invalid";
