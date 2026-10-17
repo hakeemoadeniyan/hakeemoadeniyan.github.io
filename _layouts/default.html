@@ -65,6 +65,7 @@
         <a href="{{ '/dictionary/' | relative_url }}" {% if page.url contains '/dictionary/' %}class="active"{% endif %}>Dictionary</a>
         <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
         <a href="{{ '/pdf/' | relative_url }}" {% if page.url == '/pdf/' %}class="active"{% endif %}>PDF</a>
+        <a href="{{ '/converter/' | relative_url }}" {% if page.url == '/converter/' %}class="active"{% endif %}>Converter</a>
       </nav>
       <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.site-nav').classList.toggle('open')">☰</button>
     </div>
