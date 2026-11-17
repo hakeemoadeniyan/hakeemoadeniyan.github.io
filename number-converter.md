@@ -20,7 +20,7 @@ permalink: /number-converter/
         <div class="range-info">Supports numbers from 1 to 999,999,999,999,999,999,999</div>
 
         <div class="creator-info">
-            <p><strong>System created by:</strong> Hakeem O. Adeniyan (Ọ̀dú Owó Bámirẹ́)</p>
+            <p><strong>System created by:</strong> Hakeem O. Adeniyan (Ọ̀dú Owóbámirẹ́)</p>
             <p class="copyright">© 2025 Yoruba Number New System Converter. All rights reserved.</p>
         </div>
     </div>
